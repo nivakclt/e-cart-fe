@@ -3,11 +3,12 @@ import { useEffect } from 'react'
 import ProductCard from '../components/ProductCard'
 
 
-function Home() {
+function Home({cart ,setCart}) {
 
   // state variable to hold products
   const [products,setProducts]=useState([])
 
+  
   // api call
   const getData=async()=>{
     const response=await fetch("https://fakestoreapi.com/products")
@@ -18,12 +19,21 @@ function Home() {
     getData();
   },[])
 
+  useEffect(()=>{
+    console.log(cart)
+  })
+
+  const addToCart=(product)=>{
+    setCart([...cart,product])
+    console.log(product)
+  }
+
+
   return (
-    <div className='container-fluid' style={{minHeight:'70vh'}}>
-        <h2 className="m-2">Products</h2>
-        <div>{
+    <div className='container-fluid p-5' style={{minHeight:'70vh'}}>
+        <div className='d-flex justify-content-around gap-3 flex-wrap'>{
             products.map(product=>{
-              return <ProductCard key={product.id} product={product} />
+              return <ProductCard  product={product} addToCart={addToCart}/>
             })}
         </div>
     </div>

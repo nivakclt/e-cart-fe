@@ -1,21 +1,25 @@
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
-function ProductCard(props) {
-
-  props.product
+function ProductCard({ product ,addToCart }) {
   return (
     <>
-      <Card style={{width:'18rem'}}>
+      <Card style={{ width: "18rem" }}>
         <Card.Img
           variant="top"
-          src="https://cdn.jiostore.online/v2/jmd-asp/jdprod/wrkr/products/pictures/item/free/original/apple/494741644/0/KOEsdSJnzU-w2UMH0w2JC-AppleiPhone17ProMax-MP-494741644-i-1-1200Wx1200H.jpeg"
+          src={product.image}
+          style={{
+            width: "100%",
+            height: "250px"
+          }}
         />
         <Card.Body>
-          <Card.Title>${product.title}</Card.Title>
-          <Card.Text>RS.1,30,000</Card.Text>
+          <Card.Title>{product.title}</Card.Title>
+          <Card.Text>{product.price}</Card.Text>
           <div className="d-grid">
-          <Button variant="primary" className="btn btn-dark">Add to cart</Button>
+            <Button variant="primary" className="btn btn-dark" onClick={()=>addToCart(product)}>
+              Add to cart
+            </Button>
           </div>
         </Card.Body>
       </Card>
