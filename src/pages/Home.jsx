@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import ProductCard from '../components/ProductCard'
 
 
-function Home({cart ,setCart}) {
+function Home({cart,setCart}) {
 
   // state variable to hold products
   const [products,setProducts]=useState([])
@@ -21,7 +21,7 @@ function Home({cart ,setCart}) {
 
   useEffect(()=>{
     console.log(cart)
-  })
+  },[cart])
 
   const addToCart=(product)=>{
     setCart([...cart,product])

@@ -3,7 +3,7 @@ import Navbar from "react-bootstrap/Navbar";
 import { Link } from "react-router-dom";
 import { TbBrandBunpo } from "react-icons/tb";
 
-function Header() {
+function Header({cart}) {
   return (
     <Navbar
       style={{
@@ -85,7 +85,7 @@ function Header() {
               background: "#f90000d6",
             }}
           >
-            0
+            {cart.length}
           </span>
         </Link>
       </Container>
