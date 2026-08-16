@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import ProductCard from "../components/ProductCard";
+import ProductCard from "../components/Productcard";
 import { addCartApi, updateCartApi } from "../services/Api";
 
 function Home({ cart, setCart }) {
