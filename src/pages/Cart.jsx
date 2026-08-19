@@ -1,7 +1,6 @@
 import { FaTrash } from "react-icons/fa";
 
 function Cart({ cart, setCart }) {
-
   const cartTotal = cart.reduce((total, product) => {
     return total + product.price * product.quantity;
   }, 0);
@@ -46,7 +45,6 @@ function Cart({ cart, setCart }) {
         fontFamily: "'Inter', sans-serif",
       }}
     >
-
       {/* Heading */}
       <h3
         className="m-2 fw-semibold mb-4"
@@ -64,105 +62,105 @@ function Cart({ cart, setCart }) {
         {/* Cart Table */}
         <div className="col-12 col-lg-8">
 
-          <div className="table-responsive">
+          {cart.length > 0 ? (
+            <div className="table-responsive">
 
-            <table className="table table-bordered align-middle">
+              <table className="table table-bordered align-middle">
 
-              <thead>
-                <tr>
-                  <th>Serial.no</th>
-                  <th>Title</th>
-                  <th>Image</th>
-                  <th>Price</th>
-                  <th>Quantity</th>
-                  <th>Total Price</th>
-                  <th></th>
-                </tr>
-              </thead>
-
-              <tbody>
-
-                {cart.map((product, index) => (
-                  <tr key={product.id}>
-
-                    <td>{index + 1}</td>
-
-                    <td style={{ minWidth: "180px" }}>
-                      {product.title}
-                    </td>
-
-                    <td>
-                      <img
-                        src={product.image}
-                        alt={product.title}
-                        className="img-fluid"
-                        style={{
-                          width: "120px",
-                          height: "140px",
-                          objectFit: "contain",
-                        }}
-                      />
-                    </td>
-
-                    <td>
-                      {product.price}
-                    </td>
-
-                    <td>
-
-                      <div className="d-flex align-items-center gap-2">
-
-                        <button
-                          className="btn btn-outline-success btn-sm"
-                          onClick={() =>
-                            increaseQuantity(product.id)
-                          }
-                        >
-                          +
-                        </button>
-
-                        <span className="px-2 py-1 border rounded bg-light">
-                          {product.quantity}
-                        </span>
-
-                        <button
-                          className="btn btn-outline-danger btn-sm"
-                          onClick={() =>
-                            decreaseQuantity(product.id)
-                          }
-                        >
-                          -
-                        </button>
-
-                      </div>
-
-                    </td>
-
-                    <td>
-                      {product.price * product.quantity}
-                    </td>
-
-                    <td>
-
-                      <button
-                        className="btn btn-danger"
-                        onClick={() =>
-                          removeFromCart(product.id)
-                        }
-                      >
-                        <FaTrash className="text-light" />
-                      </button>
-
-                    </td>
-
+                <thead>
+                  <tr>
+                    <th>Serial.no</th>
+                    <th>Title</th>
+                    <th>Image</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total Price</th>
+                    <th></th>
                   </tr>
-                ))}
+                </thead>
 
-              </tbody>
+                <tbody>
 
-            </table>
+                  {cart.map((product, index) => (
+                    <tr key={product.id}>
 
-          </div>
+                      <td>{index + 1}</td>
+
+                      <td style={{ minWidth: "180px" }}>
+                        {product.title}
+                      </td>
+
+                      <td>
+                        <img
+                          src={product.image}
+                          alt={product.title}
+                          className="img-fluid"
+                          style={{
+                            width: "120px",
+                            height: "140px",
+                            objectFit: "contain",
+                          }}
+                        />
+                      </td>
+
+                      <td>{product.price}</td>
+
+                      <td>
+                        <div className="d-flex align-items-center gap-2">
+
+                          <button
+                            className="btn btn-outline-success btn-sm"
+                            onClick={() =>
+                              increaseQuantity(product.id)
+                            }
+                          >
+                            +
+                          </button>
+
+                          <span className="px-2 py-1 border rounded bg-light">
+                            {product.quantity}
+                          </span>
+
+                          <button
+                            className="btn btn-outline-danger btn-sm"
+                            onClick={() =>
+                              decreaseQuantity(product.id)
+                            }
+                          >
+                            -
+                          </button>
+
+                        </div>
+                      </td>
+
+                      <td>
+                        {product.price * product.quantity}
+                      </td>
+
+                      <td>
+                        <button
+                          className="btn btn-danger"
+                          onClick={() =>
+                            removeFromCart(product.id)
+                          }
+                        >
+                          <FaTrash className="text-light" />
+                        </button>
+                      </td>
+
+                    </tr>
+                  ))}
+
+                </tbody>
+
+              </table>
+
+            </div>
+          ) : (
+            <h4 className="text-center mt-5">
+              Your cart is empty
+            </h4>
+          )}
 
         </div>
 
@@ -179,9 +177,11 @@ function Cart({ cart, setCart }) {
 
               <button
                 className="btn btn-success"
-                onClick={() =>
-                  alert("Order Placed Successfully!!!")
-                }
+                disabled={cart.length === 0}
+                onClick={() => {
+                  alert("Order Placed Successfully!!!");
+                  setCart([]);
+                }}
               >
                 Checkout
               </button>
