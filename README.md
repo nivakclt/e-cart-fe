@@ -2,6 +2,10 @@
 
 A responsive e-commerce web application built using React, providing product browsing, shopping cart, wishlist, and product management functionality.
 
+## Live Demo
+
+[View Live Project]-https://ecart-regex.vercel.app/
+
 ## Tech Stack
 
 <p>
